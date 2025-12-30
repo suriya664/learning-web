@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Elite Learning</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .register-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-primary);
+            position: relative;
+            overflow: hidden;
+            padding: 40px 20px;
+        }
+
+        .register-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(77, 208, 225, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo-link {
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--golden-accent);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .logo-link:hover {
+            color: var(--golden-light);
+            transform: scale(1.05);
+        }
+
+        .register-container {
+            position: relative;
+            z-index: 5;
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+        }
+
+        .register-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .register-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--light-cream);
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .register-subtitle {
+            color: var(--text-gray);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-label {
+            color: var(--text-gray);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            color: var(--cream-text);
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--golden-accent);
+            color: var(--cream-text);
+            box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.25);
+        }
+
+        .form-control::placeholder {
+            color: var(--text-gray);
+        }
+
+        .password-strength {
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            color: var(--text-gray);
+        }
+
+        .password-strength.weak {
+            color: #ff6b6b;
+        }
+
+        .password-strength.medium {
+            color: #ffd93d;
+        }
+
+        .password-strength.strong {
+            color: #6bcf7f;
+        }
+
+        .form-check-label {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .form-check-input:checked {
+            background-color: var(--golden-accent);
+            border-color: var(--golden-accent);
+        }
+
+        .terms-link {
+            color: var(--golden-accent);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .terms-link:hover {
+            color: var(--golden-light);
+        }
+
+        .divider {
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--glass-border);
+        }
+
+        .divider span {
+            background: var(--royal-blue);
+            padding: 0 1rem;
+            color: var(--text-gray);
+            position: relative;
+        }
+
+        .social-register {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-btn {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-gray);
+            border-radius: 10px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .social-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--golden-accent);
+            color: var(--golden-accent);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--text-gray);
+        }
+
+        .login-link a {
+            color: var(--golden-accent);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .login-link a:hover {
+            color: var(--golden-light);
+        }
+
+        @media (max-width: 576px) {
+            .register-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .register-title {
+                font-size: 2rem;
+            }
+
+            .logo-link {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="register-page">
+        <!-- Register Form -->
+        <div class="register-container">
+            <div class="register-card">
+                <!-- Logo -->
+                <div class="logo-container">
+                    <a href="index.html" class="logo-link">
+                        <i class="bi bi-translate me-2"></i>
+                        <span class="brand-text">Elite Learning</span>
+                    </a>
+                </div>
+                <h1 class="register-title">Create Account</h1>
+                <p class="register-subtitle">Start your language learning journey today</p>
+
+                <form id="registerForm">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="Enter first name" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="Enter last name" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="registerEmail" class="form-label">Email Address</label>
+                        <input type="email" class="form-control" id="registerEmail" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="registerPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="registerPassword" placeholder="Create a password" required>
+                        <div id="passwordStrength" class="password-strength"></div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" required>
+                        <div id="passwordMatch" class="password-strength"></div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number">
+                    </div>
+
+                    <div class="mb-3 form-check">
+                        <input class="form-check-input" type="checkbox" id="agreeTerms" required>
+                        <label class="form-check-label" for="agreeTerms">
+                            I agree to the <a href="#" class="terms-link">Terms and Conditions</a> and <a href="#" class="terms-link">Privacy Policy</a>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-golden w-100 btn-lg mb-3">Create Account</button>
+
+                    <div class="divider">
+                        <span>Or sign up with</span>
+                    </div>
+
+                    <div class="social-register">
+                        <a href="#" class="social-btn">
+                            <i class="bi bi-google"></i>
+                            <span>Google</span>
+                        </a>
+                        <a href="#" class="social-btn">
+                            <i class="bi bi-facebook"></i>
+                            <span>Facebook</span>
+                        </a>
+                    </div>
+
+                    <div class="login-link">
+                        Already have an account? <a href="login.html">Login here</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Password strength checker
+        const passwordInput = document.getElementById('registerPassword');
+        const passwordStrength = document.getElementById('passwordStrength');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        const passwordMatch = document.getElementById('passwordMatch');
+
+        passwordInput.addEventListener('input', function() {
+            const password = this.value;
+            let strength = 0;
+            let strengthText = '';
+
+            if (password.length >= 8) strength++;
+            if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength++;
+            if (password.match(/\d/)) strength++;
+            if (password.match(/[^a-zA-Z\d]/)) strength++;
+
+            if (password.length === 0) {
+                passwordStrength.textContent = '';
+                passwordStrength.className = 'password-strength';
+            } else if (strength <= 2) {
+                strengthText = 'Weak password';
+                passwordStrength.textContent = strengthText;
+                passwordStrength.className = 'password-strength weak';
+            } else if (strength === 3) {
+                strengthText = 'Medium password';
+                passwordStrength.textContent = strengthText;
+                passwordStrength.className = 'password-strength medium';
+            } else {
+                strengthText = 'Strong password';
+                passwordStrength.textContent = strengthText;
+                passwordStrength.className = 'password-strength strong';
+            }
+        });
+
+        // Password match checker
+        confirmPasswordInput.addEventListener('input', function() {
+            const password = passwordInput.value;
+            const confirm = this.value;
+
+            if (confirm.length === 0) {
+                passwordMatch.textContent = '';
+                passwordMatch.className = 'password-strength';
+            } else if (password === confirm) {
+                passwordMatch.textContent = 'Passwords match';
+                passwordMatch.className = 'password-strength strong';
+            } else {
+                passwordMatch.textContent = 'Passwords do not match';
+                passwordMatch.className = 'password-strength weak';
+            }
+        });
+
+        // Register form handler
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+            
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            submitButton.disabled = true;
+            submitButton.textContent = 'Creating account...';
+            
+            // Simulate registration process (replace with actual API call)
+            setTimeout(() => {
+                alert('Registration functionality would be implemented here.\nName: ' + firstName + ' ' + lastName + '\nEmail: ' + email);
+                submitButton.disabled = false;
+                submitButton.textContent = originalText;
+                
+                // In a real application, you would redirect after successful registration:
+                // window.location.href = 'login.html';
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
+
